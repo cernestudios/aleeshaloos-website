@@ -2,7 +2,6 @@ const dialog = document.querySelector('.art-dialog');
 const dialogArt = document.querySelector('.dialog-art');
 const dialogCopy = document.querySelector('.dialog-copy');
 const dialogTitle = document.querySelector('.dialog-title');
-const dialogDescription = document.querySelector('.dialog-description');
 const dialogCount = document.querySelector('.dialog-count');
 const artButtons = Array.from(document.querySelectorAll('.art-button'));
 let openedFrom;
@@ -17,10 +16,8 @@ function showArtwork(index) {
   dialogCount.textContent = `${activeIndex + 1} / ${artButtons.length}`;
 
   const title = button.dataset.artTitle;
-  const description = button.dataset.artDescription;
-  dialogCopy.hidden = !title && !description;
+  dialogCopy.hidden = !title;
   dialogTitle.textContent = title || '';
-  dialogDescription.textContent = description || '';
 }
 
 artButtons.forEach((button, index) => {
