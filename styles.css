@@ -108,6 +108,7 @@ h1{font-size:112px;margin:3px 0 11px;line-height:1.12}
 .contact-form-submit:disabled{opacity:.55;cursor:wait}
 .contact-form-status{min-height:1.45em;margin:0!important;font-size:14px!important;color:var(--muted)}
 .contact-form-status.is-success{color:var(--ink)}
+.contact-form-success{margin:0!important;font-family:var(--serif);font-size:28px!important;line-height:1.25;color:var(--ink)}
 .email-alternative{margin-top:9px!important;font-size:13px!important;color:var(--muted)}
 .email-alternative .text-link{font-size:13px;padding-bottom:2px}
 .site-footer{max-width:1440px;padding:28px 48px;display:grid;grid-template-columns:1fr auto auto;gap:10px 38px;align-items:center;margin:auto}

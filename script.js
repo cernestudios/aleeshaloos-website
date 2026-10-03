@@ -51,6 +51,7 @@ const contactForm = document.querySelector('#contact-form');
 
 if (contactForm) {
   const formStatus = contactForm.querySelector('.contact-form-status');
+  const formSuccess = document.querySelector('#contact-form-success');
   const submitButton = contactForm.querySelector('button[type="submit"]');
 
   contactForm.addEventListener('submit', async (event) => {
@@ -72,8 +73,8 @@ if (contactForm) {
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || 'Something went wrong.');
       contactForm.reset();
-      formStatus.classList.add('is-success');
-      formStatus.textContent = 'Thank you — Aleesha will be in touch soon.';
+      contactForm.hidden = true;
+      formSuccess.hidden = false;
     } catch (error) {
       formStatus.textContent = `${error.message} You can also email hello@aleeshaloos.com.`;
     } finally {
