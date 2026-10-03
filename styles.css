@@ -97,7 +97,7 @@ h1{font-size:112px;margin:3px 0 11px;line-height:1.12}
 .site-footer{max-width:1440px;padding:28px 48px;display:grid;grid-template-columns:1fr auto auto;gap:10px 38px;align-items:center;margin:auto}
 .footer-name{font-family:var(--serif);font-size:26px;line-height:1.3}
 .site-footer>p{font-size:13px;color:var(--muted)}
-.site-footer>.text-link{border:0;justify-self:end}
+.site-footer>.text-link{justify-self:end}
 .site-footer .copyright{grid-column:1/-1;font-size:12px}
 .art-dialog{padding:14px 18px 18px;border:0;background:var(--paper);color:var(--ink);max-width:calc(100% - 24px);max-height:calc(100dvh - 24px);width:max-content;margin:auto;overflow:auto}
 .art-dialog::backdrop{background:rgb(30 25 28 / 88%)}
