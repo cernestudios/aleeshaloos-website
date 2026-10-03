@@ -10,7 +10,7 @@
   <link rel="preload" href="assets/fonts/fraunces-medium.ttf" as="font" type="font/ttf" crossorigin />
   <link rel="preload" href="assets/fonts/dm-sans-regular.ttf" as="font" type="font/ttf" crossorigin />
   <link rel="stylesheet" href="styles.css?v=20261001-1" />
-  <script src="script.js?v=20261001-1" defer></script>
+  <script src="script.js?v=20261003-1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -94,7 +94,20 @@
       <div class="section-wrap contact-inner">
         <p class="eyebrow">Contact</p>
         <h2 id="contact-title">Let’s make<br />something wonderful.</h2>
-        <div class="contact-details"><p>For publishing projects, illustration commissions<br class="desktop-break" /> and creative collaborations, I'd love to hear from you.</p><a class="email-link" href="mailto:hello@aleeshaloos.com">hello@aleeshaloos.com <svg class="icon" aria-hidden="true"><use href="#arrow-up-right"/></svg></a></div>
+        <div class="contact-details">
+          <p>For publishing projects, illustration commissions<br class="desktop-break" /> and creative collaborations, I'd love to hear from you.</p>
+          <form class="contact-form" id="contact-form" action="/api/enquiry" method="post" novalidate>
+            <div class="contact-form-row">
+              <label>Name<input name="name" type="text" autocomplete="name" required /></label>
+              <label>Email<input name="email" type="email" autocomplete="email" required /></label>
+            </div>
+            <label>Tell me about your project<textarea name="message" rows="5" required placeholder="A little about your idea, timeline or brief."></textarea></label>
+            <div class="contact-form-honeypot" aria-hidden="true"><label>Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label></div>
+            <button class="contact-form-submit" type="submit">Send enquiry <svg class="icon" aria-hidden="true"><use href="#arrow-up-right"/></svg></button>
+            <p class="contact-form-status" aria-live="polite" role="status"></p>
+          </form>
+          <p class="email-alternative">Prefer email? <a class="text-link" href="mailto:hello@aleeshaloos.com">hello@aleeshaloos.com <svg class="icon" aria-hidden="true"><use href="#arrow-up-right"/></svg></a></p>
+        </div>
       </div>
     </section>
   </main>

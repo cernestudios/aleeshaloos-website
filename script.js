@@ -46,3 +46,38 @@ dialog.addEventListener('close', () => {
   document.body.classList.remove('dialog-open');
   openedFrom?.focus({ preventScroll: true });
 });
+
+const contactForm = document.querySelector('#contact-form');
+
+if (contactForm) {
+  const formStatus = contactForm.querySelector('.contact-form-status');
+  const submitButton = contactForm.querySelector('button[type="submit"]');
+
+  contactForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!contactForm.reportValidity()) return;
+
+    const formData = new FormData(contactForm);
+    const payload = Object.fromEntries(formData.entries());
+    submitButton.disabled = true;
+    formStatus.classList.remove('is-success');
+    formStatus.textContent = 'Sending…';
+
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || 'Something went wrong.');
+      contactForm.reset();
+      formStatus.classList.add('is-success');
+      formStatus.textContent = 'Thank you — Aleesha will be in touch soon.';
+    } catch (error) {
+      formStatus.textContent = `${error.message} You can also email hello@aleeshaloos.com.`;
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+}
