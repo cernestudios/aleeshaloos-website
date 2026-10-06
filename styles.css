@@ -190,8 +190,9 @@ h1{font-size:112px;margin:3px 0 11px;line-height:1.12}
 .wobble-hero h1{font-size:clamp(3rem,7vw,6.4rem);margin-top:1rem}
 .wobble-cover{width:100%;max-width:460px;margin-inline:auto;display:block;box-shadow:0 18px 40px rgb(51 41 45 / 16%)}
 .wobble-hero-copy{font-size:1.15rem;line-height:1.8;max-width:34rem;margin-top:1.8rem}
-.wobble-coming-soon{max-width:34rem;margin-top:2rem;padding-top:1.25rem;border-top:1px solid rgb(51 41 45 / 18%)}
-.wobble-coming-soon .eyebrow{margin-bottom:.55rem}
+.wobble-coming-soon{position:relative;max-width:32rem;margin-top:2rem;padding:1.15rem 1.35rem 1.2rem;background:var(--pink);border-radius:20px 20px 20px 5px;color:var(--ink)}
+.wobble-coming-soon::after{content:"";position:absolute;left:1.15rem;bottom:-10px;border-width:11px 11px 0 0;border-style:solid;border-color:var(--pink) transparent transparent transparent}
+.wobble-coming-soon .eyebrow{margin-bottom:.5rem;color:var(--rose)}
 .wobble-coming-soon>p:last-child{font-size:.98rem;line-height:1.55}
 .wobble-story{padding:6.5rem 0}
 .wobble-story-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,8vw,8rem);align-items:start}
