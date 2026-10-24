@@ -35,7 +35,7 @@ export async function onRequestPost(context) {
   let input;
   try { input = JSON.parse(body); } catch { return json({error:'Please complete the form.'},400); }
   const source = input.source;
-  if(!ready(env,source)) return json({error:'Signups are paused while setup is finished. Please download the sheet directly or email hello@aleeshaloos.com.'},503);
+  if(!ready(env,source)) return json({error:'Signups are temporarily paused. Please email hello@aleeshaloos.com for help.'},503);
   if(input.website) return json({ok:true});
   const email = String(input.email || '').trim().toLowerCase();
   const name = String(input.name || '').trim().slice(0,80);
@@ -55,9 +55,9 @@ export async function onRequestPost(context) {
     await env.SIGNUP_DB.prepare("INSERT OR IGNORE INTO signup_requests (id,email,name,source,updates,consent_version,created_at,ip_hash,status) VALUES (?,?,?,?,?,?,?,?,'pending')").bind(id,email,name,source,updates?1:0,CONSENT_VERSION,now,ip).run();
     const greeting = name ? 'Hi '+name+',' : 'Hello,';
     const text = source === 'halloween'
-      ? greeting+'\n\nHere’s your little Halloween treat!\n\nDownload your colouring sheet: '+downloadURL(env)+'\n\nThank you for making a little time to create.\n\nAleesha\nhttps://aleeshaloos.com'
+      ? greeting+'\n\nThank you for requesting Aleesha’s Halloween colouring sheet.\n\nDownload your PDF here: '+downloadURL(env)+'\n\nI hope you enjoy making it your own.\n\nAleesha Loos\nhttps://aleeshaloos.com'
       : greeting+'\n\nYou’re on Wobble’s pre-release waitlist. I’ll email you when Wobble and the Big Feeling is ready. This isn’t a preorder or reservation.\n\nThank you for making room for this little friend.\n\nAleesha\nhttps://aleeshaloos.com/wobble/';
-    await send(env,email,source === 'halloween'?'Your little Halloween colouring treat':'You’re on Wobble’s list!',text,'signup-'+id);
+    await send(env,email,source === 'halloween'?'Your Halloween colouring sheet from Aleesha Loos':'You’re on Wobble’s list!',text,'signup-'+id);
     await send(env,'hello@aleeshaloos.com','New '+(source === 'halloween'?'Halloween sheet request':'Wobble waitlist signup'), 'Name: '+(name || 'Not provided')+'\nEmail: '+email+'\nInterest: '+source+'\nGeneral updates opt-in: '+(updates?'Yes':'No'), 'signup-owner-'+id);
     await env.SIGNUP_DB.prepare("UPDATE signup_requests SET status='sent' WHERE id=?").bind(id).run();
     if(env.NOTION_API_KEY) context.waitUntil(syncAudience(env,email).catch(error=>console.error('Audience sync failed',error.message)));
