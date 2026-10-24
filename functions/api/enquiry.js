@@ -1,4 +1,4 @@
-const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function clean(value, limit) {
   return String(value || '').trim().slice(0, limit);
@@ -55,7 +55,7 @@ export async function onRequestPost(context) {
         to: ['hello@aleeshaloos.com'],
         reply_to: email,
         subject: `New illustration enquiry — ${name}`,
-        text: `Name: ${name}\\nEmail: ${email}\\n\\nMessage:\\n${message}`,
+        text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       }),
     });
 
