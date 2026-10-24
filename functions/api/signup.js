@@ -1,3 +1,4 @@
+import {syncAudience} from '../_lib/notion-sync.js';
 const ORIGIN = 'https://aleeshaloos.com';
 const CONSENT_VERSION = '2026-10-24';
 const json = (value, status = 200) => Response.json(value, {status, headers:{'Cache-Control':'no-store'}});
@@ -25,7 +26,8 @@ async function send(env, to, subject, text, idempotency) {
   if (!response.ok) throw new Error('email_provider_' + response.status);
   return response.json();
 }
-export async function onRequestPost({request, env}) {
+export async function onRequestPost(context) {
+  const {request, env} = context;
   if (request.headers.get('Origin') !== ORIGIN && request.headers.get('Origin') !== 'https://www.aleeshaloos.com') return json({error:'Please use the form on aleeshaloos.com.'},403);
   if (!request.headers.get('Content-Type')?.includes('application/json')) return json({error:'Please use the signup form.'},415);
   const body = await request.text();
@@ -44,7 +46,10 @@ export async function onRequestPost({request, env}) {
   const ip = await hash((request.headers.get('CF-Connecting-IP') || '')+'|'+now.slice(0,10));
   try {
     const prior = await env.SIGNUP_DB.prepare('SELECT status FROM signup_requests WHERE id = ?').bind(id).first();
-    if(prior?.status === 'sent') return json({ok:true,...(source === 'halloween'?{download:downloadURL(env)}:{})});
+    if(prior?.status === 'sent') {
+      if(env.NOTION_API_KEY) context.waitUntil(syncAudience(env,email).catch(error=>console.error('Audience sync failed',error.message)));
+      return json({ok:true,...(source === 'halloween'?{download:downloadURL(env)}:{})});
+    }
     const rate = await env.SIGNUP_DB.prepare("SELECT COUNT(*) AS n FROM signup_requests WHERE ip_hash = ? AND created_at > ?").bind(ip,new Date(Date.now()-3600000).toISOString()).first();
     if(rate.n >= 20) return json({error:'Please try again a little later.'},429);
     await env.SIGNUP_DB.prepare("INSERT OR IGNORE INTO signup_requests (id,email,name,source,updates,consent_version,created_at,ip_hash,status) VALUES (?,?,?,?,?,?,?,?,'pending')").bind(id,email,name,source,updates?1:0,CONSENT_VERSION,now,ip).run();
@@ -55,6 +60,7 @@ export async function onRequestPost({request, env}) {
     await send(env,email,source === 'halloween'?'Your little Halloween colouring treat':'You’re on Wobble’s list!',text,'signup-'+id);
     await send(env,'hello@aleeshaloos.com','New '+(source === 'halloween'?'Halloween sheet request':'Wobble waitlist signup'), 'Name: '+(name || 'Not provided')+'\nEmail: '+email+'\nInterest: '+source+'\nGeneral updates opt-in: '+(updates?'Yes':'No'), 'signup-owner-'+id);
     await env.SIGNUP_DB.prepare("UPDATE signup_requests SET status='sent' WHERE id=?").bind(id).run();
+    if(env.NOTION_API_KEY) context.waitUntil(syncAudience(env,email).catch(error=>console.error('Audience sync failed',error.message)));
     return json({ok:true,...(source === 'halloween'?{download:downloadURL(env)}:{})});
   } catch(error) {
     console.error('Signup processing failed',error.message);
