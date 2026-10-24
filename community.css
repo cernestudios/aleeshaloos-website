@@ -39,7 +39,7 @@
 
 /* Seasonal Halloween feature */
 .halloween-feature{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(32px,7vw,90px);align-items:center;padding-top:72px;padding-bottom:72px;background:#f5df7940}
-.halloween-feature-photo{overflow:hidden;border-radius:46% 46% 9px 9px;max-height:530px}.halloween-feature-photo img{display:block;width:100%;aspect-ratio:1.18;object-fit:cover}
+.halloween-feature-photo{width:min(100%,420px);justify-self:center;overflow:hidden;border-radius:46% 46% 9px 9px;max-height:530px}.halloween-feature-photo img{display:block;width:100%;aspect-ratio:1.18;object-fit:cover}
 .halloween-feature-copy{max-width:480px;padding-right:28px}.halloween-feature-copy h2{font-size:clamp(42px,5.5vw,70px);line-height:1.04;margin:18px 0}.halloween-feature-copy>p:not(.eyebrow){font-size:17px;line-height:1.7;max-width:400px}.halloween-feature-copy .text-link{margin-top:16px}.halloween-feature-detail{position:absolute;width:62px;right:3%;bottom:5%;transform:rotate(14deg);pointer-events:none}
 .links-main{position:relative;max-width:520px;padding:50px 24px 18px}.links-main .links-portrait{width:122px;height:122px;object-fit:cover;border-radius:50%;border:5px solid var(--paper);box-shadow:0 8px 30px #33292d18}
 .links-list{gap:13px}.link-card{min-height:74px;gap:16px;padding:18px 22px;border-radius:17px;background:#fffdf9e8;box-shadow:0 4px 14px #33292d0a}.link-card strong{font-size:20px}.link-card small{font-size:12px}.link-card .card-arrow{font-size:21px}
