@@ -1,0 +1,38 @@
+[hidden]{display:none!important}
+.community-header{max-width:1180px;margin:auto;padding:24px 6%;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.community-header .text-link{font-size:13px}
+.community-footer{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;padding:36px 20px;color:var(--muted);font-size:12px}
+.community-footer a{text-underline-offset:5px}
+.links-page{background:radial-gradient(ellipse at 5% 12%,#f3d5d980,transparent 45%),radial-gradient(ellipse at 95% 65%,#d8e8ee90,transparent 45%),var(--paper)}
+.links-main{max-width:600px;padding:54px 24px 16px;margin:auto;text-align:center}
+.links-portrait{width:100px;height:100px;object-fit:cover;border-radius:50%;border:6px solid var(--paper);outline:1px solid var(--line)}
+.links-main h1{font-size:48px;margin:22px 0 12px}.links-main .intro{max-width:340px;margin:0 auto 32px;color:var(--muted);font-size:15px;line-height:1.7}
+.links-list{display:grid;gap:12px;text-align:left}
+.link-card{display:flex;gap:18px;align-items:center;padding:21px 24px;border:1px solid #33292d25;border-radius:9px;background:var(--paper);text-decoration:none;transition:transform .15s,background .15s}
+.link-card:hover{transform:translateY(-2px);background:#fff}.link-card:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.link-card strong{font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.2;display:block}.link-card small{display:block;font-size:12px;line-height:1.5;margin-top:5px;color:var(--muted)}
+.link-card .card-arrow{margin-left:auto;font-size:23px}.link-card .card-number{font-size:11px;align-self:flex-start;margin-top:5px}
+.link-card.halloween{background:#f5df7980}.link-card.wobble{background:#d8e8eea6}.link-card.support{background:#f3d5d950}
+.link-card[aria-disabled=true]{opacity:.65;cursor:default}.links-note{margin:24px 0;font-size:12px;color:var(--muted)}
+.community-main{max-width:1120px;padding:50px 6% 70px;margin:auto}.community-hero{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.community-hero h1{font-size:clamp(42px,5vw,70px);line-height:1.05;margin:18px 0 24px}.community-hero p{line-height:1.7}
+.halloween-cover{background:#f5df7960;aspect-ratio:1;border-radius:47% 47% 8px 8px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:35px;border:1px solid #33292d20;position:relative}
+.halloween-cover .sparkles{font-size:65px;color:var(--rose);letter-spacing:12px}.halloween-cover strong{font:42px/1.15 var(--serif);max-width:6em}.halloween-cover small{font-size:12px;margin-top:20px;letter-spacing:.08em}
+.community-main .signup-card{margin-top:55px}
+.signup-card{padding:clamp(24px,4vw,44px);background:#f3d5d950;border:1px solid #33292d1f;border-radius:12px}
+.signup-card h2{font-size:clamp(30px,4vw,43px);line-height:1.15;margin:12px 0 18px}.signup-intro>p:last-child{max-width:580px;line-height:1.7;font-size:16px}
+.signup-availability{margin:22px 0 0;padding:18px;background:#ffffff70;border-radius:8px;font-size:14px;line-height:1.65}
+.signup-form{margin-top:26px}.signup-fields{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.signup-fields label{display:block;font-size:14px}.signup-fields label span{color:var(--muted);font-size:12px}.signup-fields input{display:block;width:100%;margin-top:8px;padding:13px 14px;border:1px solid #33292d50;border-radius:5px;background:#fffaf1c9;color:var(--ink);font:16px var(--sans)}
+.signup-fields input:focus{outline:2px solid var(--rose);outline-offset:2px}
+.signup-check{display:flex;align-items:flex-start;gap:10px;margin:20px 0 12px;font-size:14px;line-height:1.6}.signup-check input{width:18px;height:18px;flex-shrink:0;margin-top:3px;accent-color:var(--rose)}
+.signup-fine{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:20px}.signup-submit{padding:14px 20px;background:var(--ink);color:var(--paper);border:0;border-radius:5px;font:14px var(--sans);cursor:pointer}.signup-submit span{margin-left:24px}.signup-submit:disabled{opacity:.55;cursor:wait}
+.signup-honey{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.signup-error{margin-top:16px;color:#8c263a;font-size:14px}
+.signup-thanks{position:relative;text-align:center;max-width:600px;margin:12px auto;padding:40px 24px;background:#f5df79a0;border-radius:45px 45px 45px 8px;outline:none}
+.signup-thanks p{line-height:1.7}.thanks-spark{display:block;color:var(--rose);font-size:36px;margin-bottom:16px}.thanks-signoff{font-size:13px;margin-top:24px}.thanks-signoff span{display:inline-block;font:26px var(--serif);margin-top:8px}
+.waitlist-section{padding:45px 0 75px}.waitlist-section .signup-card{max-width:850px;margin:auto;background:#d8e8ee80}.waitlist-jump{margin-top:20px;display:inline-block}
+.privacy-copy{max-width:700px;margin:auto;line-height:1.8}.privacy-copy h1{font-size:48px;margin-bottom:28px}.privacy-copy h2{font-size:27px;margin:28px 0 12px}
+@media(max-width:650px){.links-main{padding-top:30px}.links-main h1{font-size:40px}.link-card{padding:20px 17px}.link-card strong{font-size:21px}.community-hero{grid-template-columns:1fr;gap:32px}.halloween-cover{max-width:380px;width:100%;margin:auto}.signup-fields{grid-template-columns:1fr}.community-main{padding-top:24px}.community-footer{gap:16px}.waitlist-section{padding-left:6%;padding-right:6%}}
+@media(prefers-reduced-motion:reduce){.link-card{transition:none}}
+
