@@ -1,3 +1,4 @@
+import {syncEnquiry} from '../_lib/notion-sync.js';
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function clean(value, limit) {
@@ -37,7 +38,10 @@ export async function onRequestPost(context) {
     const prior = await context.env.SIGNUP_DB.prepare(
       'SELECT status FROM enquiries WHERE id = ?'
     ).bind(id).first();
-    if (prior?.status === 'sent') return Response.json({ ok: true });
+    if (prior?.status === 'sent') {
+      if (context.env.NOTION_API_KEY) context.waitUntil(syncEnquiry(context.env, id).catch(error => console.error('Enquiry sync failed', error.message)));
+      return Response.json({ ok: true });
+    }
 
     await context.env.SIGNUP_DB.prepare(
       "INSERT OR IGNORE INTO enquiries (id, email, name, message, source, created_at, status) VALUES (?, ?, ?, ?, 'website', ?, 'pending')"
@@ -67,6 +71,7 @@ export async function onRequestPost(context) {
     await context.env.SIGNUP_DB.prepare(
       "UPDATE enquiries SET status = 'sent' WHERE id = ?"
     ).bind(id).run();
+    if (context.env.NOTION_API_KEY) context.waitUntil(syncEnquiry(context.env, id).catch(error => console.error('Enquiry sync failed', error.message)));
     return Response.json({ ok: true });
   } catch (error) {
     console.error('Enquiry processing failed', error.message);
