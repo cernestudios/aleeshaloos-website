@@ -1,0 +1,9 @@
+.strawberry-feature{margin:0 0 42px}
+.strawberry-art{aspect-ratio:3654/1818;background:transparent}
+.strawberry-art img{object-fit:contain}
+.art-dialog:has(.strawberry-art) .dialog-art{width:min(1100px,calc(100vw - 60px))}
+@media(max-width:600px){
+  .strawberry-feature{margin-bottom:30px}
+  .strawberry-art{aspect-ratio:1818/3654}
+  .art-dialog:has(.strawberry-art) .dialog-art{width:calc(100vw - 60px)}
+}
